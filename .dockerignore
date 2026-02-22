@@ -1,0 +1,11 @@
+data/
+weights/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.git/
+.gitignore
+*.egg-info/
+dist/
+build/

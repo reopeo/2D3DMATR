@@ -1,0 +1,23 @@
+services:
+  matr2d3d:
+    build: .
+    image: matr2d3d:latest
+    # GPU access (requires NVIDIA Container Toolkit)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    volumes:
+      # Mount project root so code changes reflect immediately
+      - .:/workspace
+      # Mount data directory separately (can be a large external path)
+      # Adjust the host path (left side) as needed
+      - ./data:/workspace/data
+    working_dir: /workspace
+    # Shared memory: required for DataLoader with multiple workers
+    ipc: host
+    stdin_open: true
+    tty: true
